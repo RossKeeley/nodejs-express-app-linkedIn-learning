@@ -26,7 +26,14 @@ app.set('view engine', 'ejs');
 // tells express where to find those views - expects the template to be in a folder called views
 app.set('views', path.join(__dirname, './views'));
 
+app.locals.siteName = 'ROUX Meetups';
+
 app.use(express.static(path.join(__dirname, './static')));
+
+app.use((req, res, next) => {
+  res.locals.someVariable = 'hello';
+  return next();
+});
 
 app.use(
   '/',
